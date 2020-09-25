@@ -1,3 +1,3 @@
-# Dobble
+# Match Game
 
-With this project I intend to create a multiplayer web version of the cardgame Dobble/Spot it.
+With this project I intend to create a multiplayer game inspired on the cardgame Dobble/Spot it.
