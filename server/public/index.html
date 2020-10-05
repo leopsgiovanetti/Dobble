@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>DOBBLE</title>
+</head>
+<body>
+    <div class="container" id='container'>
+        <button id="start"> start</button>
+        <div class="row"> 
+            <div class="col-md-6">
+                <div class="row ">
+                    <div class="col-md-6">
+                        <div class="player-header"> <span id="playerName"></span> (YOU) </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="player-header"> SCORE: <span id="playerScore"> 0000 </span> </div>
+                    </div>
+                    
+                </div>
+                
+                
+            </div>
+            <div class="col-md-6">
+                <div class="timer" id="timer">00:00</div>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div id="player-card"> </div>
+            </div>
+
+            <div class="col-md-6">
+                <div id="table-card"> </div>
+            </div>
+            
+
+        </div>   
+
+        <br>
+        <div class="row" id="other-players-header"> 
+
+        </div>
+        
+        <div class="row" id="other-players-card"> 
+
+        </div>   
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- <script src="scripts/render-game.js"></script> -->
+    <script type="module">
+        import createGame from './scripts/game.js'
+        import createMouseListener from './scripts/mouse-listener.js'
+        import { renderGame, gameOver } from './scripts/render-game.js'
+
+        const playerCard = document.getElementById('player-card')
+        const tableCard = document.getElementById('table-card')
+
+        const game = createGame()
+        const mouseListener = createMouseListener(document)
+
+        const socket = io()
+
+        socket.on('connect', () => {
+            const playerId = socket.id
+            console.log(`Player connected on Client with id: ${playerId}`)
+            
+        })
+
+        socket.on('setup', (state) => {
+                const playerId = socket.id
+                game.setState(state)
+
+                const playerName = prompt('Digite seu nome: ')
+                const name = {
+                    playerName: playerName
+                }
+                socket.emit('update-name', name)
+
+                mouseListener.registerPlayerId(playerId)
+                mouseListener.subscribe(game.checkMatch)
+                mouseListener.subscribe((command) => {
+                    socket.emit('check-match', command)
+                })
+                
+                // renderGame(playerCard, tableCard, game.state, playerId)
+        })
+
+        socket.on('update-state', (command) => {
+                console.log('previous state:')
+                console.log(game.state)
+                console.log(command)
+                const playerId = socket.id
+                game.setState(command.state)
+                console.log('new state: ')
+                console.log(game.state)
+                renderGame(playerCard, tableCard, game.state, playerId)
+        })
+        
+        socket.on('add-player', (command) => {
+                console.log(`Receiving ${command.type} -> ${command.playerId}`)
+                game.addPlayer(command)
+        })
+
+        socket.on('remove-player', (command) => {
+            console.log(`Receiving ${command.type} -> ${command.playerId}`)
+            game.removePlayer(command)
+        })
+
+        socket.on('game-over', (command) => {
+            console.log(`Receiving ${command.type}`)
+            gameOver(playerCard, tableCard, command.winner)
+        })
+
+    </script>
+    <!-- <script src="static/scripts/deckCreator.js"></script> -->
+    <!-- <script src="static/scripts/game.js"></script> -->
+</body>
+</html>

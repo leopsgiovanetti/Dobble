@@ -1,0 +1,101 @@
+.dobble-card{
+    border: 1px solid black;
+    text-align: center;
+    width:300px;
+    height: 300px;
+    border-radius: 50%;
+    margin:auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+.last-point{
+    background: yellow;
+}
+
+.other-player{
+    width:250px;
+    height: 250px;
+}
+
+.card-image{
+    /* border: 1px dashed gray; */
+    display: inline-block;
+    vertical-align: middle;
+}
+
+img.size0{
+    width: 25px;
+    height: 25px
+}
+
+img.size1{
+    width: 36px;
+    height: 36px
+}
+
+img.size2{
+    width: 45px;
+    height: 45px
+}
+
+img.size3{
+    width: 60px;
+    height: 60px
+}
+
+.images-container{
+    margin-top: 2.5%;
+    margin-left: 2.5%;
+    height:95%;
+    width:95%;
+}
+
+.images.row{
+    height:25%
+}
+
+.rotate60 {
+    -webkit-transform: rotate(60deg);
+    -moz-transform: rotate(60deg);
+    -o-transform: rotate(60deg);
+    -ms-transform: rotate(60deg);
+    transform: rotate(60deg);
+}
+
+.rotate120 {
+    -webkit-transform: rotate(120deg);
+    -moz-transform: rotate(120deg);
+    -o-transform: rotate(120deg);
+    -ms-transform: rotate(120deg);
+    transform: rotate(120deg);
+}
+
+.timer{
+    text-align: center;
+    font-size: 36px;
+}
+
+#table-card, #player-card, .other-player-card{
+    text-align: center;
+    border: 3px solid black;
+    
+    align-items: center;
+}
+
+.player-header{
+    text-align: center;
+    color: white;
+    background: black;
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.other-player-header{
+    text-align: center;
+    color: white;
+    background: black;
+    font-weight: 700;
+    font-size: 20px;
+}

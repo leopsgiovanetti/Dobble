@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>DOBBLE</title>
+</head>
+<body>
+    <div class="container" id='container'>
+        <button id="start"> start</button>
+        <div class="row"> 
+            <div class="col-md-6">
+                <div class="timer" id="timer">00:00</div>
+            </div>
+            <div class="col-md-6">
+                <div class="row ">
+                    <div class="col-md-6">
+                        <div class="player-header"> YOUR CARD </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="player-header"> SCORE: <span id="score"> 0000 </span> </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div id="table-card"> TABLE CARD</div>
+            </div>
+            <div class="col-md-6">
+                <div id="player-card"> PLAYER CARD</div>
+            </div>
+
+        </div>        
+    </div>
+
+    <script src="scripts/deckCreator.js"></script>
+    <script src="scripts/game.js"></script>
+</body>
+</html>
